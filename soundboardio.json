@@ -9,7 +9,7 @@
     "url": "https://github.com"
   },
   "lang": "en",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icons": [
     {
       "src": "icons/icon-192x192.png",
@@ -32,7 +32,7 @@
     { "name": "📟 P.K.E. Alternate", "filename": "pke-meter-lp-rev.mp3", "tags": [ "Investigation" ] },
     { "name": "🕶️ Goggles Focus", "filename": "protongogglestransfirstperson.mp3", "tags": [ "Investigation" ] },
     { "name": "🕶️ Goggles Ambient", "filename": "protongoggles-exist-lp.mp3", "tags": [ "Investigation" ] },
-    { "name": "🧪 Scan Complete", "filename": "ui_scan_complete.mp3", "tags": [ "Investigation" ] },
+    { "name": "🧪 Scan Complete", "filename": "pke-find.mp3", "tags": [ "Investigation" ] },
 
     { "name": "🎒 Proton Pack Startup", "filename": "proton-pack-power-on.mp3", "tags": [ "Combat" ] },
     { "name": "🎒 Pack Overheat", "filename": "proton-pack-overheat.mp3", "tags": [ "Combat" ] },
@@ -46,7 +46,7 @@
     { "name": "🧪 Slime Blower Fire", "filename": "slimegun-fire-lp.mp3", "tags": [ "Combat" ] },
 
     { "name": "🖥️ Firehouse Computer", "filename": "env-firehouse-computer-1.mp3", "tags": [ "HQ & Containment" ] },
-    { "name": "💰 Cash Register Ding", "filename": "ui_levelend_cashcountup_final.mp3", "tags": [ "HQ & Containment" ] },
+    { "name": "💰 Cash Register Ding", "filename": "Mp Award Earned.mp3", "tags": [ "HQ & Containment" ] },
 
     { "name": "🟢 Slimed Splat 1", "filename": "slimegun-splat-01.mp3", "tags": [ "Meta Game" ] },
     { "name": "🟢 Slimed Splat 2", "filename": "slimegun-splat-05.mp3", "tags": [ "Meta Game" ] },

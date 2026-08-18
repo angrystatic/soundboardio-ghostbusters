@@ -9,7 +9,7 @@
     "url": "https://github.com"
   },
   "lang": "en",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "icons": [
     {
       "src": "icons/icon-192x192.png",
@@ -60,6 +60,22 @@
     { "name": "⚔️ Battle Theme 2", "filename": "Music Fight Loop 02.mp3", "tags": [ "Music Loops" ] },
     { "name": "👑 Stay Puft (Apocalypse)", "filename": "Music Staypuff Loop 01.mp3", "tags": [ "Music Loops" ] },
     { "name": "🏆 Triumphant Win Theme", "filename": "Mp Win.mp3", "tags": [ "Music Loops" ] },
-    { "name": "📉 Deflating Lose Theme", "filename": "Mp Lose.mp3", "tags": [ "Music Loops" ] }
+    { "name": "📉 Deflating Lose Theme", "filename": "Mp Lose.mp3", "tags": [ "Music Loops" ] },
+
+    { "name": "⚠️ Stinger: Heavy Shock", "filename": "Stinger 01a.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Ghostly Chime", "filename": "Stinger 01b.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Sudden Discovery", "filename": "Stinger 02.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Ominous Threat", "filename": "Stinger 04.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Spectral Climax", "filename": "Stinger 08.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Creeping Dread", "filename": "Stinger 10.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Rising Alarm", "filename": "Stinger 14.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Spooky Squelch", "filename": "Stinger 17.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Sudden Shock", "filename": "Stinger 20.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Eerie Whispers", "filename": "Stinger 25.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Slime Escalation", "filename": "Stinger 30.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: P.K.E. Peak", "filename": "Stinger 35.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Unstable Energy", "filename": "Stinger 44.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Dark Revelation", "filename": "Stinger 50.mp3", "tags": [ "Stingers" ] },
+    { "name": "⚠️ Stinger: Final Collapse", "filename": "Stinger 57.mp3", "tags": [ "Stingers" ] }
   ]
 }

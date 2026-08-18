@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      background: #e21c24;
+      color: #ffffff;
+      border: 1px solid #b91c1c;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+      height: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    button:hover {
+      background: #b91c1c;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="rollStinger()">⚡ Roll Random Ghostly Stinger</button>
+
+  <script>
+    function rollStinger() {
+      var stingers = [
+        'Stinger 01a', 'Stinger 01b', 'Stinger 02', 'Stinger 03', 'Stinger 04', 
+        'Stinger 07', 'Stinger 08', 'Stinger 10', 'Stinger 11', 'Stinger 12', 
+        'Stinger 13', 'Stinger 14', 'Stinger 15', 'Stinger 16', 'Stinger 17', 
+        'Stinger 18', 'Stinger 19', 'Stinger 20', 'Stinger 21', 'Stinger 22', 
+        'Stinger 23', 'Stinger 24', 'Stinger 25', 'Stinger 26', 'Stinger 27', 
+        'Stinger 28', 'Stinger 29', 'Stinger 30', 'Stinger 31', 'Stinger 32', 
+        'Stinger 33', 'Stinger 34', 'Stinger 35', 'Stinger 36', 'Stinger 37', 
+        'Stinger 38', 'Stinger 39', 'Stinger 40', 'Stinger 42', 'Stinger 43', 
+        'Stinger 44', 'Stinger 45', 'Stinger 46', 'Stinger 47', 'Stinger 48', 
+        'Stinger 49', 'Stinger 50', 'Stinger 51', 'Stinger 52', 'Stinger 53', 
+        'Stinger 54', 'Stinger 56', 'Stinger 57'
+      ];
+      var chosen = stingers[Math.floor(Math.random() * stingers.length)];
+      
+      // Since stinger.html lives in the root, it can find the sounds folder relatively!
+      var audioUrl = 'sounds/' + encodeURIComponent(chosen) + '.mp3';
+      
+      var sound = new Audio(audioUrl);
+      sound.volume = 0.8;
+      sound.play().catch(function(err) {
+        console.error("Autoplay/playback error: ", err);
+      });
+    }
+  </script>
+</body>
+</html>

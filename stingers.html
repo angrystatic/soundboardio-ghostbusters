@@ -1,49 +1,611 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <title>Ghostbusters Tabletop Audio Deck</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    :root {
+      --bg-color: #121212;
+      --panel-bg: #1e1e1e;
+      --red-accent: #e21c24;
+      --red-hover: #b91c1c;
+      --slime-green: #39ff14;
+      --slime-dim: #1e800a;
+      --text-color: #f3f4f6;
+      --text-dim: #9ca3af;
+      --border-color: #2e2e2e;
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 10px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      user-select: none;
     }
-    button {
-      background: #e21c24;
-      color: #ffffff;
-      border: 1px solid #b91c1c;
-      border-radius: 4px;
-      padding: 8px 16px;
+
+    /* Master Controls Banner */
+    .master-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .master-title {
+      font-size: 1rem;
       font-weight: bold;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--red-accent);
+      margin: 0;
+    }
+
+    .master-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .volume-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 80px;
+      background: var(--border-color);
+      height: 4px;
+      border-radius: 2px;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--red-accent);
       cursor: pointer;
-      font-size: 13px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-stop-all {
+      background: var(--red-accent);
+      color: white;
+      border: 1px solid #7f1d1d;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-stop-all:hover {
+      background: var(--red-hover);
+      box-shadow: 0 0 6px rgba(226, 28, 36, 0.4);
+    }
+
+    /* Sub-Navigation Category Tabs */
+    .tab-bar {
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 2px;
+    }
+
+    .tab-btn {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      color: var(--text-dim);
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-color);
+      background: #2a2a2a;
+    }
+
+    .tab-btn.active {
+      color: var(--slime-green);
+      border-color: var(--border-color);
+      background: var(--panel-bg);
+      box-shadow: inset 0 2px 0 var(--slime-green);
+    }
+
+    /* Deck Layout */
+    .tab-panel {
+      display: none;
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .grid-deck {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+    }
+
+    /* Playing Button Cards */
+    .tile-button {
+      background: #242426;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      padding: 8px 6px;
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tile-button:hover {
+      background: #2e2e30;
+      border-color: #3e3e40;
+      transform: translateY(-1px);
+    }
+
+    .tile-name {
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: var(--text-color);
+      line-height: 1.25;
       width: 100%;
-      height: 40px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      word-wrap: break-word;
+    }
+
+    .tile-sub {
+      font-size: 0.55rem;
+      color: var(--text-dim);
+      margin-top: 4px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    button:hover {
-      background: #b91c1c;
+
+    /* Actively Playing / Looping Glowing States */
+    .tile-button.playing {
+      border-color: var(--slime-green);
+      box-shadow: 0 0 8px rgba(57, 255, 20, 0.2), inset 0 0 6px rgba(57, 255, 20, 0.1);
+      background: #172d11;
     }
-    button:active {
-      transform: scale(0.98);
+
+    .tile-button.playing .tile-name {
+      color: var(--slime-green);
+    }
+
+    .loop-toggle {
+      position: absolute;
+      bottom: 3px;
+      right: 3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      border: 1px solid var(--border-color);
+      background: #2e2e2e;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7px;
+      color: var(--text-dim);
+    }
+
+    .loop-toggle.active {
+      border-color: var(--slime-green);
+      color: var(--slime-green);
+      background: #13240e;
+    }
+
+    /* Randomizer View CSS */
+    .random-panel {
+      text-align: center;
+      padding: 12px 0;
+    }
+
+    .btn-giant-roll {
+      background: #e21c24;
+      color: white;
+      border: 2px solid #b91c1c;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      transition: all 0.2s;
+      margin: 0 auto 10px auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn-giant-roll:hover {
+      background: #ff2b34;
+      transform: scale(1.03);
+    }
+
+    .btn-giant-roll span {
+      font-size: 1.5rem;
+      margin-bottom: 2px;
+    }
+
+    .roll-history {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      background: #161616;
+      padding: 6px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      border: 1px solid var(--border-color);
+    }
+
+    ::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 2px;
     }
   </style>
 </head>
 <body>
 
-  <button onclick="rollStinger()">⚡ Roll Random Ghostly Stinger</button>
+  <!-- Master Controls -->
+  <div class="master-header">
+    <h1 class="master-title">🚫 Tactical Audio Station</h1>
+    <div class="master-controls">
+      <div class="volume-container">
+        <span>🔇</span>
+        <input type="range" id="masterVolume" min="0" max="1" step="0.05" value="0.8" oninput="updateMasterVolume(this.value)">
+        <span>🔊</span>
+      </div>
+      <button class="btn-stop-all" onclick="stopAllAudio()">🛑 Stop All</button>
+    </div>
+  </div>
+
+  <!-- Tabs Navigation -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab-random')">🎲 Random</button>
+    <button class="tab-btn" onclick="switchTab('tab-arms')">📞 Call to Arms</button>
+    <button class="tab-btn" onclick="switchTab('tab-investigation')">📟 Investigation</button>
+    <button class="tab-btn" onclick="switchTab('tab-combat')">⚡ Combat</button>
+    <button class="tab-btn" onclick="switchTab('tab-meta')">🎲 Meta</button>
+    <button class="tab-btn" onclick="switchTab('tab-moods')">🎭 Moods</button>
+  </div>
+
+  <!-- Tab 1: Spooky Randomizer -->
+  <div id="tab-random" class="tab-panel active">
+    <div class="random-panel">
+      <button class="btn-giant-roll" onclick="rollRandomStinger()">
+        <span>⚡</span>Roll Random<br>Stinger
+      </button>
+      <div id="roll-status" style="margin-bottom: 8px; font-weight: bold; font-size: 0.75rem; color: var(--slime-green);">Ready to haunt...</div>
+      <div class="roll-history" id="roll-history">Last Played: None</div>
+    </div>
+  </div>
+
+  <!-- Tab 2: Call to Arms Phase -->
+  <div id="tab-arms" class="tab-panel">
+    <div class="grid-deck">
+      <div class="tile-button" onclick="playTile(this, 'env-firehouse-computer-1.mp3', false)">
+        <span class="tile-name">☎️ Dispatch Phone</span>
+        <span class="tile-sub">SFX</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Stinger 14.mp3', false)">
+        <span class="tile-name">🚨 Firehouse Alarm</span>
+        <span class="tile-sub">Stinger</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Stinger 44.mp3', false)">
+        <span class="tile-name">🚨 Ecto-1 Siren</span>
+        <span class="tile-sub">Swell</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Elevator Musak Loop.mp3', true)">
+        <span class="tile-name">📺 TV/Radio Jingle</span>
+        <span class="tile-sub">Muzak Loop</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 3: Investigation Phase -->
+  <div id="tab-investigation" class="tab-panel">
+    <div class="grid-deck">
+      <div class="tile-button" onclick="playTile(this, 'pke-beep-lp.mp3', true)">
+        <span class="tile-name">📟 P.K.E. Chirp Loop</span>
+        <span class="tile-sub">Scanning Hum</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'pke-find.mp3', false)">
+        <span class="tile-name">📟 Target Scan Found</span>
+        <span class="tile-sub">Lock-on</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'protongoggles-exist-lp.mp3', true)">
+        <span class="tile-name">🕶️ Ecto Goggles Whine</span>
+        <span class="tile-sub">Sensory</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'protongogglestransfirstperson.mp3', false)">
+        <span class="tile-name">🕶️ Goggles Focus POV</span>
+        <span class="tile-sub">Click</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Stinger 01b.mp3', false)">
+        <span class="tile-name">🌬️ Cold Spot Whoosh</span>
+        <span class="tile-sub">Swoosh</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 4: Combat & Containment -->
+  <div id="tab-combat" class="tab-panel">
+    <div class="grid-deck">
+      <div class="tile-button" onclick="playTile(this, 'proton-pack-power-on.mp3', false)">
+        <span class="tile-name">🎒 Pack Cycle Up</span>
+        <span class="tile-sub">Startup</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'pack-heat-lp.mp3', true)">
+        <span class="tile-name">🎒 Pack Heat Build</span>
+        <span class="tile-sub">Charging</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'proton-pack-overheat.mp3', false)">
+        <span class="tile-name">🎒 Pack Overheat</span>
+        <span class="tile-sub">Vent SFX</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'protonpack-overheat-beep-lp.mp3', true)">
+        <span class="tile-name">🎒 Overheat Beep Loop</span>
+        <span class="tile-sub">Meltdown Drone</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'pack_fire_ongoing.mp3', true)">
+        <span class="tile-name">⚡ Neutrona Beam Blast</span>
+        <span class="tile-sub">Stream Fire</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Stinger 19.mp3', false)">
+        <span class="tile-name">🏺 Trap Throw</span>
+        <span class="tile-sub">Throw Slide</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'trap-capturing-lp.mp3', true)">
+        <span class="tile-name">🌀 Suction Vortex Loop</span>
+        <span class="tile-sub">Capture Pull</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'trap-capture-successful.mp3', false)">
+        <span class="tile-name">🔒 Trap Snap & Beep</span>
+        <span class="tile-sub">Success Clank</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'trap-full-beep.mp3', true)">
+        <span class="tile-name">🏺 Trap Full Beep</span>
+        <span class="tile-sub">Warning Loop</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'slimegun-splat-01.mp3', false)">
+        <span class="tile-name">🧪 Slime Blower Squelch</span>
+        <span class="tile-sub">Splat</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'slimegun-fire-lp.mp3', true)">
+        <span class="tile-name">🧪 Slime Blower Chug</span>
+        <span class="tile-sub">Chemical Spray</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'pack-heat-lp.mp3', true)">
+        <span class="tile-name">🔗 Lasso Capture Loop</span>
+        <span class="tile-sub">Hold Drone</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Amb Tonal Cem Underground Loop.mp3', true)">
+        <span class="tile-name">🔋 Containment Grid Hum</span>
+        <span class="tile-sub">Warding Hum</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Stinger 11.mp3', false)">
+        <span class="tile-name">⚠️ Containment Alarm</span>
+        <span class="tile-sub">Pulsing Alarm</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Stinger 57.mp3', false)">
+        <span class="tile-name">💥 Containment Breach</span>
+        <span class="tile-sub">Explosion hit</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 5: Meta Game -->
+  <div id="tab-meta" class="tab-panel">
+    <div class="grid-deck">
+      <div class="tile-button" onclick="playTile(this, 'Mp Award Earned.mp3', false)">
+        <span class="tile-name">🎰 Joker Jackpot Deal</span>
+        <span class="tile-sub">Savage Raise</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Firehouse Aracde Activate.mp3', false)">
+        <span class="tile-name">💎 Benny Spend</span>
+        <span class="tile-sub">Spend Token</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'slimegun-splat-05.mp3', false)">
+        <span class="tile-name">🟢 Slime Splat!</span>
+        <span class="tile-sub">Slimed</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Stinger 20.mp3', false)">
+        <span class="tile-name">🥴 Shaken / Stunned</span>
+        <span class="tile-sub">Stinger</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'radio-end.mp3', false)">
+        <span class="tile-name">📻 Walkie Chirp-Click</span>
+        <span class="tile-sub">Squawk</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Stinger 12.mp3', false)">
+        <span class="tile-name">🎒 Pack Cold Out</span>
+        <span class="tile-sub">Power-Down</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'unique-portal.mp3', false)">
+        <span class="tile-name">🌀 Unique Portal</span>
+        <span class="tile-sub">Rift portal</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 6: Moods & Playlists -->
+  <div id="tab-moods" class="tab-panel">
+    <div class="grid-deck">
+      <div class="tile-button" onclick="playTile(this, 'mood_creeping_dread_library.mp3', true)">
+        <span class="tile-name">🕵️‍♂️ Creeping Dread</span>
+        <span class="tile-sub">Looping Mood</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, '13thfloor Mirror Reveal Mid.mp3', false)">
+        <span class="tile-name">😱 Shock & Panic Sting</span>
+        <span class="tile-sub">Jump Scare</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'mood_battle_loop_1.mp3', true)">
+        <span class="tile-name">⚔️ Chaotic Battle Loop</span>
+        <span class="tile-sub">Looping Combat</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'Music Tense Loop 01.mp3', true)">
+        <span class="tile-name">⏳ Tense Containment</span>
+        <span class="tile-sub">Tension Loop</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'mood_triumph_match_win.mp3', false)">
+        <span class="tile-name">🏆 Retro 80s Triumph</span>
+        <span class="tile-sub">Match Win</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'mood_failure_match_lose.mp3', false)">
+        <span class="tile-name">📉 Comedic Failure</span>
+        <span class="tile-sub">Match Lose</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'pke-meter-lp-rev.mp3', true)">
+        <span class="tile-name">🐝 Walter Peck Buzz</span>
+        <span class="tile-sub">Bureaucracy</span>
+        <span class="loop-toggle" title="Looping Ambient" onclick="toggleLoop(event, this)">🔄</span>
+      </div>
+      <div class="tile-button" onclick="playTile(this, 'mood_triumph_award_earned.mp3', false)">
+        <span class="tile-name">💡 Egon's Eureka Moment</span>
+        <span class="tile-sub">Eureka!</span>
+      </div>
+    </div>
+  </div>
 
   <script>
-    function rollStinger() {
-      var stingers = [
+    const SOUNDS_DIR = 'sounds/'; // Targets relative subdirectory on Github Pages
+    let masterVolume = 0.8;
+    const activeAudios = {}; 
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+      
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
+      if (activeBtn) activeBtn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function updateMasterVolume(val) {
+      masterVolume = parseFloat(val);
+      Object.keys(activeAudios).forEach(key => {
+        if (activeAudios[key]) activeAudios[key].volume = masterVolume;
+      });
+    }
+
+    function stopAllAudio() {
+      Object.keys(activeAudios).forEach(key => {
+        if (activeAudios[key]) {
+          activeAudios[key].pause();
+          activeAudios[key] = null;
+        }
+      });
+      document.querySelectorAll('.tile-button').forEach(btn => btn.classList.remove('playing'));
+      document.getElementById('roll-status').innerText = "All active frequencies quieted.";
+    }
+
+    function toggleLoop(event, element) {
+      event.stopPropagation(); 
+      element.classList.toggle('active');
+      const button = element.closest('.tile-button');
+      const filename = button.getAttribute('onclick').split("'")[3];
+      if (activeAudios[filename]) {
+        activeAudios[filename].loop = element.classList.contains('active');
+      }
+    }
+
+    function playTile(element, filename, defaultLoop) {
+      if (activeAudios[filename]) {
+        activeAudios[filename].pause();
+        activeAudios[filename] = null;
+        element.classList.remove('playing');
+        return;
+      }
+
+      // Automatically URL-encodes special characters and spaces safely!
+      const audioUrl = SOUNDS_DIR + encodeURIComponent(filename);
+      const audio = new Audio(audioUrl);
+      audio.volume = masterVolume;
+      
+      const loopIndicator = element.querySelector('.loop-toggle');
+      const shouldLoop = loopIndicator ? loopIndicator.classList.contains('active') : defaultLoop;
+      audio.loop = shouldLoop;
+
+      audio.onended = function() {
+        if (!audio.loop) {
+          activeAudios[filename] = null;
+          element.classList.remove('playing');
+        }
+      };
+
+      activeAudios[filename] = audio;
+      element.classList.add('playing');
+      
+      audio.play().catch(err => {
+        console.error("Audio block: ", err);
+        element.classList.remove('playing');
+        activeAudios[filename] = null;
+        alert("Ectoplasmic block! Could not load: " + filename + "\nCheck if file was uploaded to /sounds/.");
+      });
+    }
+
+    function rollRandomStinger() {
+      const stingers = [
         'Stinger 01a', 'Stinger 01b', 'Stinger 02', 'Stinger 03', 'Stinger 04', 
         'Stinger 07', 'Stinger 08', 'Stinger 10', 'Stinger 11', 'Stinger 12', 
         'Stinger 13', 'Stinger 14', 'Stinger 15', 'Stinger 16', 'Stinger 17', 
@@ -56,16 +618,24 @@
         'Stinger 49', 'Stinger 50', 'Stinger 51', 'Stinger 52', 'Stinger 53', 
         'Stinger 54', 'Stinger 56', 'Stinger 57'
       ];
-      var chosen = stingers[Math.floor(Math.random() * stingers.length)];
       
-      // Since stinger.html lives in the root, it can find the sounds folder relatively!
-      var audioUrl = 'sounds/' + encodeURIComponent(chosen) + '.mp3';
+      const chosen = stingers[Math.floor(Math.random() * stingers.length)];
+      const filename = chosen + '.mp3';
+      const audioUrl = SOUNDS_DIR + encodeURIComponent(filename);
       
-      var sound = new Audio(audioUrl);
-      sound.volume = 0.8;
-      sound.play().catch(function(err) {
-        console.error("Autoplay/playback error: ", err);
-      });
+      document.getElementById('roll-status').innerText = "Rerolling energy currents...";
+      
+      const sound = new Audio(audioUrl);
+      sound.volume = masterVolume;
+      sound.play()
+        .then(() => {
+          document.getElementById('roll-status').innerText = "🎯 Fired: " + chosen;
+          document.getElementById('roll-history').innerText = "Last Played: " + chosen + " (Symphonic Stinger)";
+        })
+        .catch(err => {
+          console.error("Stinger roll failed: ", err);
+          document.getElementById('roll-status').innerText = "❌ Static interference on " + chosen;
+        });
     }
   </script>
 </body>

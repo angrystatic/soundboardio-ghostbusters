@@ -1,18 +1,3 @@
-# ⚡ Ghostbusters Tabletop RPG Soundboard: TiddlyWiki Setup Guide
-
-By hosting a **custom audio controller** directly inside your GitHub Pages repository alongside your files, you can completely bypass TiddlyWiki's security blocks, eliminate all ads, support robust URL encoding for spaces, and gain advanced features like **volume control**, **category tabs**, and **instantly responsive buttons**.
-
-Follow these simple steps to deploy your custom, ad-free audio deck!
-
----
-
-## 🛠️ Step 1: Create `soundboard.html` on GitHub
-
-1. Go to your GitHub repository root folder: `angrystatic/soundboardio-ghostbusters`.
-2. Click **Add file** -> **Create new file**.
-3. Name the file exactly: **`soundboard.html`**.
-4. Copy and paste this complete, professionally designed code block into the file:
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -425,36 +410,3 @@ Follow these simple steps to deploy your custom, ad-free audio deck!
   </script>
 </body>
 </html>
-```
-
-5. Click **Commit changes** at the bottom of the page.
-
----
-
-## 🔌 Step 2: Embed the Controller in TiddlyWiki
-
-Once GitHub Pages processes the new file (which takes about 30 to 60 seconds), you can render the audio console directly inside your wiki dashboard!
-
-1. Open your TiddlyWiki.
-2. Create a new tiddler titled exactly: **`⚙️ GM Audio Control Deck`**.
-3. Set the **Type** of the tiddler to **`text/html`** (using the dropdown selector).
-4. Paste this clean `<iframe>` wrapper code:
-
-```html
-<iframe src="https://angrystatic.github.io/soundboardio-ghostbusters/soundboard.html" 
-        style="width: 100%; height: 280px; border: 1px solid #333333; border-radius: 6px; background: #121212; overflow: hidden;" 
-        scrolling="no" 
-        allow="autoplay">
-</iframe>
-```
-
-5. Save and close the tiddler!
-
----
-
-## 🎛️ Why This Deck Outperforms SoundBoardio
-
-*   **URL Encoding Fix**: By running the fetch request through JavaScript's `encodeURIComponent(file)` method, **spaces in filenames are automatically handled by the browser**, preventing the "corrupted" error messages on files like `Stinger 14.mp3` or `Mp Award Earned.mp3`.
-*   **Loop Management**: It automatically detects loop keywords (like `-lp` or `Loop`) and handles ambient streams seamlessly, keeping loops active until manually toggled or cleared.
-*   **The Nuclear Option (Stop All)**: It has a global channel tracking engine that allows GMs to immediately quiet down all active alarms and looping ambient fight music with a single click as the scene concludes!
-*   **Full Custom Volume**: GMs can independently dial in soundscape volumes directly inside the TiddlyWiki panel without adjusting their computer's main speaker volume.

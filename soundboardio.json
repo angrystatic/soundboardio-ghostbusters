@@ -9,7 +9,7 @@
     "url": "https://github.com"
   },
   "lang": "en",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icons": [
     {
       "src": "icons/icon-192x192.png",
@@ -32,37 +32,34 @@
     { "name": "📟 P.K.E. Alternate", "filename": "pke-meter-lp-rev.mp3", "tags": [ "Investigation" ] },
     { "name": "🕶️ Goggles Focus", "filename": "protongogglestransfirstperson.mp3", "tags": [ "Investigation" ] },
     { "name": "🕶️ Goggles Ambient", "filename": "protongoggles-exist-lp.mp3", "tags": [ "Investigation" ] },
-    { "name": "🧪 Scan Complete", "filename": "pke-find.mp3", "tags": [ "Investigation" ] },
 
     { "name": "🎒 Proton Pack Startup", "filename": "proton-pack-power-on.mp3", "tags": [ "Combat" ] },
+    { "name": "🎒 Pack Heat Build", "filename": "pack-heat-lp.mp3", "tags": [ "Combat" ] },
     { "name": "🎒 Pack Overheat", "filename": "proton-pack-overheat.mp3", "tags": [ "Combat" ] },
-    { "name": "🎒 Overheat Beep", "filename": "protonpack-overheat-beep-lp.mp3", "tags": [ "Combat" ] },
+    { "name": "🎒 Overheat Warning", "filename": "protonpack-overheat-beep-lp.mp3", "tags": [ "Combat" ] },
     { "name": "⚡ Stream Blast", "filename": "pack_fire_ongoing.mp3", "tags": [ "Combat" ] },
-    { "name": "🏺 Trap Throw", "filename": "trap_throw.mp3", "tags": [ "Combat" ] },
-    { "name": "🚪 Trap Open", "filename": "trap_open.mp3", "tags": [ "Combat" ] },
     { "name": "🌀 Vortex Suction", "filename": "trap-capturing-lp.mp3", "tags": [ "Combat" ] },
     { "name": "🔒 Trap Success", "filename": "trap-capture-successful.mp3", "tags": [ "Combat" ] },
     { "name": "🏺 Trap Full Beep", "filename": "trap-full-beep.mp3", "tags": [ "Combat" ] },
     { "name": "🧪 Slime Blower Fire", "filename": "slimegun-fire-lp.mp3", "tags": [ "Combat" ] },
 
     { "name": "🖥️ Firehouse Computer", "filename": "env-firehouse-computer-1.mp3", "tags": [ "HQ & Containment" ] },
-    { "name": "💰 Cash Register Ding", "filename": "Mp Award Earned.mp3", "tags": [ "HQ & Containment" ] },
+    { "name": "💰 Paycheck Earned", "filename": "Mp Award Earned.mp3", "tags": [ "HQ & Containment" ] },
 
     { "name": "🟢 Slimed Splat 1", "filename": "slimegun-splat-01.mp3", "tags": [ "Meta Game" ] },
     { "name": "🟢 Slimed Splat 2", "filename": "slimegun-splat-05.mp3", "tags": [ "Meta Game" ] },
     { "name": "🌀 Unique Portal", "filename": "unique-portal.mp3", "tags": [ "Meta Game" ] },
 
-    { "name": "🕵️‍♂️ Creeping Dread (Library)", "filename": "mood_creeping_dread_library.mp3", "tags": [ "Music Loops" ] },
-    { "name": "🕵️‍♂️ Creeping Dread (Synth 1)", "filename": "mood_creeping_dread_eerie_1.mp3", "tags": [ "Music Loops" ] },
-    { "name": "🕵️‍♂️ Creeping Dread (Synth 2)", "filename": "mood_creeping_dread_eerie_2.mp3", "tags": [ "Music Loops" ] },
-    { "name": "👹 Boss Mirror Reveal", "filename": "mood_boss_reveal_mirror.mp3", "tags": [ "Music Loops" ] },
-    { "name": "👹 Boss Librarian Reveal", "filename": "mood_boss_reveal_librarian.mp3", "tags": [ "Music Loops" ] },
-    { "name": "⚔️ Battle (Library Centaur)", "filename": "mood_battle_loop_library.mp3", "tags": [ "Music Loops" ] },
-    { "name": "⚔️ Battle Theme 1", "filename": "mood_battle_loop_1.mp3", "tags": [ "Music Loops" ] },
-    { "name": "⚔️ Battle Theme 2", "filename": "mood_battle_loop_2.mp3", "tags": [ "Music Loops" ] },
-    { "name": "👑 Stay Puft (Apocalypse)", "filename": "mood_staypuft_boss_theme.mp3", "tags": [ "Music Loops" ] },
-    { "name": "🏆 Mission Success Award", "filename": "mood_triumph_award_earned.mp3", "tags": [ "Music Loops" ] },
-    { "name": "🏆 Triumphant Win Theme", "filename": "mood_triumph_match_win.mp3", "tags": [ "Music Loops" ] },
-    { "name": "📉 Deflating Lose Theme", "filename": "mood_failure_match_lose.mp3", "tags": [ "Music Loops" ] }
+    { "name": "🕵️‍♂️ Creeping Dread (Library)", "filename": "Amb Library Loop.mp3", "tags": [ "Music Loops" ] },
+    { "name": "🕵️‍♂️ Creeping Dread (Eerie 1)", "filename": "Music Eerie 05.mp3", "tags": [ "Music Loops" ] },
+    { "name": "🕵️‍♂️ Creeping Dread (Eerie 2)", "filename": "Music Eerie 06.mp3", "tags": [ "Music Loops" ] },
+    { "name": "👹 Boss Mirror Reveal", "filename": "13thfloor Mirror Reveal Mid.mp3", "tags": [ "Music Loops" ] },
+    { "name": "👹 Boss Librarian Sting", "filename": "Music Lib Librarian Sting 01.mp3", "tags": [ "Music Loops" ] },
+    { "name": "⚔️ Battle (Library Loop)", "filename": "Music Lib Cent Fight Loop.mp3", "tags": [ "Music Loops" ] },
+    { "name": "⚔️ Battle Theme 1", "filename": "Music Fight Loop 01.mp3", "tags": [ "Music Loops" ] },
+    { "name": "⚔️ Battle Theme 2", "filename": "Music Fight Loop 02.mp3", "tags": [ "Music Loops" ] },
+    { "name": "👑 Stay Puft (Apocalypse)", "filename": "Music Staypuff Loop 01.mp3", "tags": [ "Music Loops" ] },
+    { "name": "🏆 Triumphant Win Theme", "filename": "Mp Win.mp3", "tags": [ "Music Loops" ] },
+    { "name": "📉 Deflating Lose Theme", "filename": "Mp Lose.mp3", "tags": [ "Music Loops" ] }
   ]
 }
